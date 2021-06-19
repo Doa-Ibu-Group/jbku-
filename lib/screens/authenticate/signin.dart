@@ -30,7 +30,7 @@ class _SignInState extends State<SignIn> {
             appBar: AppBar(
               backgroundColor: Colors.black,
               elevation: 0.0,
-              title: Text('Sign In To JBKU'),
+              title: Text('Sign In '),
               actions: [
                 IconButton(
                     padding: EdgeInsets.only(right: 40.0),
