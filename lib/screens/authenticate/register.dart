@@ -19,7 +19,11 @@ class _RegisterState extends State<Register> {
 
   String email = '';
   String password = '';
-  String name = '';
+  String username = '';
+  String fullname = '';
+  String nric = '';
+  String location = '';
+
   String error = '';
 
   @override
@@ -56,13 +60,28 @@ class _RegisterState extends State<Register> {
                       ),
                       TextFormField(
                         decoration: textInputDecoration.copyWith(
+                          hintText: 'NRIC',
+                        ),
+                        validator: (value) =>
+                            value.isEmpty ? 'Enter NRIC' : null,
+                        onChanged: (value) {
+                          setState(() {
+                            nric = value;
+                          });
+                        },
+                      ),
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      TextFormField(
+                        decoration: textInputDecoration.copyWith(
                           hintText: 'Full Name',
                         ),
                         validator: (value) =>
                             value.isEmpty ? 'Enter Full Name' : null,
                         onChanged: (value) {
                           setState(() {
-                            name = value;
+                            fullname = value;
                           });
                         },
                       ),
@@ -78,6 +97,36 @@ class _RegisterState extends State<Register> {
                         onChanged: (value) {
                           setState(() {
                             email = value;
+                          });
+                        },
+                      ),
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      TextFormField(
+                        decoration: textInputDecoration.copyWith(
+                          hintText: 'Username',
+                        ),
+                        validator: (value) =>
+                            value.isEmpty ? 'Enter Username' : null,
+                        onChanged: (value) {
+                          setState(() {
+                            username = value;
+                          });
+                        },
+                      ),
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      TextFormField(
+                        decoration: textInputDecoration.copyWith(
+                          hintText: 'location',
+                        ),
+                        validator: (value) =>
+                            value.isEmpty ? 'Enter location' : null,
+                        onChanged: (value) {
+                          setState(() {
+                            location = value;
                           });
                         },
                       ),
@@ -106,7 +155,12 @@ class _RegisterState extends State<Register> {
                             if (_formKey.currentState.validate()) {
                               setState(() => loading = true);
                               dynamic result = await _auth.registerWithEmail(
-                                  email, password);
+                                  email,
+                                  password,
+                                  nric,
+                                  fullname,
+                                  username,
+                                  location);
                               if (result == null) {
                                 setState(() {
                                   error = 'Please fill in valid email';

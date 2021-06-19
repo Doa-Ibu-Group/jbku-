@@ -20,6 +20,16 @@ class DatabaseService {
     });
   }
 
+  Future addUserAdditionalData(
+      String nric, String fullname, String username, String location) async {
+    return await reportCollection.document(uid).setData({
+      'nric': nric,
+      'fullname': fullname,
+      'username': username,
+      'location': location,
+    });
+  }
+
   //reportStreamfrom snapshot
   List<Report> _reportListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
