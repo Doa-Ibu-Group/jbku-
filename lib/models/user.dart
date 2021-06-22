@@ -18,3 +18,18 @@ class UserData {
       required this.reportDescription,
       required this.reportCategory});
 }
+
+class UserInformation {
+  final String uid;
+  final String fullname;
+  final String location;
+  final String nric;
+  final String username;
+
+  UserInformation(
+      {required this.uid,
+      required this.fullname,
+      required this.location,
+      required this.nric,
+      required this.username});
+}

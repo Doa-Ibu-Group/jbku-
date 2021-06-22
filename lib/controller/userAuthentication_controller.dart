@@ -1,10 +1,11 @@
 // @dart=2.9
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:jbku_project/controller/user_controller.dart';
 import 'package:jbku_project/models/user.dart';
 import 'package:jbku_project/screens/authenticate/signin.dart';
-import 'package:jbku_project/services/database.dart';
+import 'package:jbku_project/controller/report_controller.dart';
 
-class AuthService {
+class UserAuthController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   //create user object based on FirebaseUser
@@ -51,8 +52,8 @@ class AuthService {
           email: email, password: password);
       FirebaseUser user = result.user;
       //create a new document  for the user with the uid
-      await DatabaseService(uid: user.uid)
-          .addUserAdditionalData(nric, fullname, username, location);
+      await UserController(uid: user.uid)
+          .addUserInfo(nric, fullname, username, location);
       return _userFromFirebaseUser(user);
     } catch (e) {
       print(e.toString());

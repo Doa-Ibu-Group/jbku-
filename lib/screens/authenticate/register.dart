@@ -1,6 +1,6 @@
 // @dart=2.9
 import 'package:flutter/material.dart';
-import 'package:jbku_project/services/auth.dart';
+import 'package:jbku_project/controller/userAuthentication_controller.dart';
 import 'package:jbku_project/share/constant.dart';
 import 'package:jbku_project/share/loading.dart';
 
@@ -13,7 +13,7 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-  final AuthService _auth = AuthService();
+  final UserAuthController _user = UserAuthController();
   final _formKey = GlobalKey<FormState>();
   bool loading = false;
 
@@ -53,130 +53,132 @@ class _RegisterState extends State<Register> {
                     EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.00),
                 child: Form(
                   key: _formKey,
-                  child: Column(
-                    children: <Widget>[
-                      SizedBox(
-                        height: 20.0,
-                      ),
-                      TextFormField(
-                        decoration: textInputDecoration.copyWith(
-                          hintText: 'NRIC',
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: <Widget>[
+                        SizedBox(
+                          height: 20.0,
                         ),
-                        validator: (value) =>
-                            value.isEmpty ? 'Enter NRIC' : null,
-                        onChanged: (value) {
-                          setState(() {
-                            nric = value;
-                          });
-                        },
-                      ),
-                      SizedBox(
-                        height: 20.0,
-                      ),
-                      TextFormField(
-                        decoration: textInputDecoration.copyWith(
-                          hintText: 'Full Name',
+                        TextFormField(
+                          decoration: textInputDecoration.copyWith(
+                            hintText: 'NRIC',
+                          ),
+                          validator: (value) =>
+                              value.isEmpty ? 'Enter NRIC' : null,
+                          onChanged: (value) {
+                            setState(() {
+                              nric = value;
+                            });
+                          },
                         ),
-                        validator: (value) =>
-                            value.isEmpty ? 'Enter Full Name' : null,
-                        onChanged: (value) {
-                          setState(() {
-                            fullname = value;
-                          });
-                        },
-                      ),
-                      SizedBox(
-                        height: 20.0,
-                      ),
-                      TextFormField(
-                        decoration: textInputDecoration.copyWith(
-                          hintText: 'Email',
+                        SizedBox(
+                          height: 20.0,
                         ),
-                        validator: (value) =>
-                            value.isEmpty ? 'Enter an Email' : null,
-                        onChanged: (value) {
-                          setState(() {
-                            email = value;
-                          });
-                        },
-                      ),
-                      SizedBox(
-                        height: 20.0,
-                      ),
-                      TextFormField(
-                        decoration: textInputDecoration.copyWith(
-                          hintText: 'Username',
+                        TextFormField(
+                          decoration: textInputDecoration.copyWith(
+                            hintText: 'Full Name',
+                          ),
+                          validator: (value) =>
+                              value.isEmpty ? 'Enter Full Name' : null,
+                          onChanged: (value) {
+                            setState(() {
+                              fullname = value;
+                            });
+                          },
                         ),
-                        validator: (value) =>
-                            value.isEmpty ? 'Enter Username' : null,
-                        onChanged: (value) {
-                          setState(() {
-                            username = value;
-                          });
-                        },
-                      ),
-                      SizedBox(
-                        height: 20.0,
-                      ),
-                      TextFormField(
-                        decoration: textInputDecoration.copyWith(
-                          hintText: 'location',
+                        SizedBox(
+                          height: 20.0,
                         ),
-                        validator: (value) =>
-                            value.isEmpty ? 'Enter location' : null,
-                        onChanged: (value) {
-                          setState(() {
-                            location = value;
-                          });
-                        },
-                      ),
-                      SizedBox(
-                        height: 20.0,
-                      ),
-                      TextFormField(
-                        decoration:
-                            textInputDecoration.copyWith(hintText: 'Password'),
-                        obscureText: true,
-                        validator: (value) => value.length < 6
-                            ? 'Enter a password more than 6 chars'
-                            : null,
-                        onChanged: (value) {
-                          setState(() {
-                            password = value;
-                          });
-                        },
-                      ),
-                      SizedBox(
-                        height: 30.0,
-                      ),
-                      ElevatedButton(
-                          child: Text('register'),
-                          onPressed: () async {
-                            if (_formKey.currentState.validate()) {
-                              setState(() => loading = true);
-                              dynamic result = await _auth.registerWithEmail(
-                                  email,
-                                  password,
-                                  nric,
-                                  fullname,
-                                  username,
-                                  location);
-                              if (result == null) {
-                                setState(() {
-                                  error = 'Please fill in valid email';
-                                  loading = false;
-                                });
+                        TextFormField(
+                          decoration: textInputDecoration.copyWith(
+                            hintText: 'Email',
+                          ),
+                          validator: (value) =>
+                              value.isEmpty ? 'Enter an Email' : null,
+                          onChanged: (value) {
+                            setState(() {
+                              email = value;
+                            });
+                          },
+                        ),
+                        SizedBox(
+                          height: 20.0,
+                        ),
+                        TextFormField(
+                          decoration: textInputDecoration.copyWith(
+                            hintText: 'Username',
+                          ),
+                          validator: (value) =>
+                              value.isEmpty ? 'Enter Username' : null,
+                          onChanged: (value) {
+                            setState(() {
+                              username = value;
+                            });
+                          },
+                        ),
+                        SizedBox(
+                          height: 20.0,
+                        ),
+                        TextFormField(
+                          decoration: textInputDecoration.copyWith(
+                            hintText: 'location',
+                          ),
+                          validator: (value) =>
+                              value.isEmpty ? 'Enter location' : null,
+                          onChanged: (value) {
+                            setState(() {
+                              location = value;
+                            });
+                          },
+                        ),
+                        SizedBox(
+                          height: 20.0,
+                        ),
+                        TextFormField(
+                          decoration: textInputDecoration.copyWith(
+                              hintText: 'Password'),
+                          obscureText: true,
+                          validator: (value) => value.length < 6
+                              ? 'Enter a password more than 6 chars'
+                              : null,
+                          onChanged: (value) {
+                            setState(() {
+                              password = value;
+                            });
+                          },
+                        ),
+                        SizedBox(
+                          height: 30.0,
+                        ),
+                        ElevatedButton(
+                            child: Text('register'),
+                            onPressed: () async {
+                              if (_formKey.currentState.validate()) {
+                                setState(() => loading = true);
+                                dynamic result = await _user.registerWithEmail(
+                                    email,
+                                    password,
+                                    nric,
+                                    fullname,
+                                    username,
+                                    location);
+                                if (result == null) {
+                                  setState(() {
+                                    error = 'Please fill in valid email';
+                                    loading = false;
+                                  });
+                                }
                               }
-                            }
-                          }),
-                      SizedBox(
-                        height: 20.0,
-                      ),
-                      Text(
-                        error,
-                        style: TextStyle(color: Colors.red),
-                      ),
-                    ],
+                            }),
+                        SizedBox(
+                          height: 20.0,
+                        ),
+                        Text(
+                          error,
+                          style: TextStyle(color: Colors.red),
+                        ),
+                      ],
+                    ),
                   ),
                 )),
           );

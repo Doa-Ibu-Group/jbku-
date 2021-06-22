@@ -1,6 +1,6 @@
 // @dart=2.9
 import 'package:flutter/material.dart';
-import 'package:jbku_project/services/auth.dart';
+import 'package:jbku_project/controller/userAuthentication_controller.dart';
 import 'package:jbku_project/share/constant.dart';
 import 'package:jbku_project/share/loading.dart';
 
@@ -13,7 +13,7 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-  final AuthService _auth = AuthService();
+  final UserAuthController _auth = UserAuthController();
   final _formKey = GlobalKey<FormState>();
   bool loading = false;
 

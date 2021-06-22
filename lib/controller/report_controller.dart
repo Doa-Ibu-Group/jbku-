@@ -3,15 +3,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:jbku_project/models/report.dart';
 import 'package:jbku_project/models/user.dart';
 
-class DatabaseService {
+class ReportController {
   final String uid;
-  DatabaseService({this.uid});
+  ReportController({this.uid});
   //collection reference
   final CollectionReference reportCollection =
       Firestore.instance.collection('reports');
 
-  Future updateUserData(String name, String titleOfReport,
-      String reportCategory, String reportDescription) async {
+  Future addUserReport(String name, String titleOfReport, String reportCategory,
+      String reportDescription) async {
     return await reportCollection.document(uid).setData({
       'name': name,
       'titleOfReport': titleOfReport,
@@ -62,5 +62,11 @@ class DatabaseService {
         titleOfReport: snapshot.data['titleOfReport'],
         reportDescription: snapshot.data['reportDescription'],
         reportCategory: snapshot.data['reportCategory']);
+  }
+
+  //check if snapshot exist
+  bool dataIsExists(String uid) {
+    reportCollection.document(uid).get();
+    DocumentSnapshot task;
   }
 }

@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:jbku_project/models/user.dart';
 import 'package:jbku_project/screens/wrapper.dart';
-import 'package:jbku_project/services/auth.dart';
+import 'package:jbku_project/controller/userAuthentication_controller.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamProvider<User>.value(
-      value: AuthService().user,
+      value: UserAuthController().user,
       child: MaterialApp(
         home: Wrapper(),
       ),
