@@ -17,6 +17,7 @@ class ReportController {
       'titleOfReport': titleOfReport,
       'reportCategory': reportCategory,
       'reportDescription': reportDescription,
+      'dateTime': DateTime.now(),
     });
   }
 
@@ -37,7 +38,8 @@ class ReportController {
           name: doc.data['name'] ?? '',
           reportCategory: doc.data['reportCategory'] ?? '',
           titleOfReport: doc.data['titleOfReport'] ?? '',
-          reportDescription: doc.data['reportDescription'] ?? '');
+          reportDescription: doc.data['reportDescription'] ?? '',
+          dateTime: doc.data['dateTime'].toDate() ?? '');
     }).toList();
   }
 

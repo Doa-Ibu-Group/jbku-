@@ -1,5 +1,9 @@
+// @dart=2.9
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:jbku_project/controller/user_controller.dart';
 import 'package:jbku_project/models/report.dart';
+import 'package:jbku_project/models/user.dart';
 import 'package:jbku_project/screens/home/create_report.dart';
 import 'package:jbku_project/screens/home/report_list.dart';
 import 'package:jbku_project/controller/userAuthentication_controller.dart';
@@ -9,6 +13,7 @@ import 'package:provider/provider.dart';
 
 class Home extends StatelessWidget {
   final UserAuthController _auth = UserAuthController();
+
   @override
   Widget build(BuildContext context) {
     return StreamProvider<List<Report>>.value(
@@ -44,7 +49,7 @@ class Home extends StatelessWidget {
                     return CreateReportPage();
                   }));
                 },
-                child: Text("Make Report"))
+                child: Text("Make Report")),
           ],
         ),
         body: ReportList(),

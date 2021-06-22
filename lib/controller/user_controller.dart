@@ -37,4 +37,14 @@ class UserController {
         nric: snapshot.data['nric'],
         username: snapshot.data['username']);
   }
+
+  Future<DocumentSnapshot> getData() async {
+    return await userCollection.document(uid).get();
+  }
+
+  Future<String> getUserFullName() async {
+    DocumentSnapshot snapshot = await getData();
+    print('print from Controller${snapshot.data['fullname']}');
+    return snapshot.data['fullname'];
+  }
 }

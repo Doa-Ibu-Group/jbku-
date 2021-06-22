@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:jbku_project/models/report.dart';
 
 class ReportTile extends StatelessWidget {
@@ -17,8 +18,10 @@ class ReportTile extends StatelessWidget {
             backgroundColor: Colors.amber,
             backgroundImage: AssetImage('assets/person.png'),
           ),
-          title: Text(report.name),
-          subtitle: Text(report.titleOfReport),
+          title: Text('${report.titleOfReport} - ${report.reportCategory}'),
+          subtitle: Text(
+              '${DateFormat.jm().format(report.dateTime)}- ${report.name}'),
+          isThreeLine: true,
         ),
       ),
     );
