@@ -1,6 +1,9 @@
-# jbku_project
+# JBku
 
-A new Flutter project.
+JBku is a platform for Johor Bahru's citizens to express common problems inside the city for the purpose of creating a better environment, accelerate the region's development, and ease the communication bridge between officials and the people.
+
+An app that will become the bridge of communication between the government and Johor's people. While people are able to report those problems, the government, as the admin of the application, will receive the report and forward the issue to the responsible department.
+
 
 ## Getting Started
 
