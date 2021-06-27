@@ -63,7 +63,7 @@ class _CreatePotholesPageState extends State<CreatePotholesPage> {
                       decoration:
                           textInputDecoration.copyWith(hintText: 'Description'),
                       validator: (value) =>
-                          value.isEmpty ? 'Enter Report Description' : null,
+                          value.isEmpty ? 'Enter Report Description ' : null,
                       onChanged: (value) {
                         setState(() => model.currentReportDescription = value);
                       },
