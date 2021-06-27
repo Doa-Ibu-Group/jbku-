@@ -29,6 +29,7 @@ dependencies:
   flutter_spinkit: ^4.0.0
   intl: ^0.17.0
   provider: ^4.3.3
+  stacked: ^1.2.0
 
 dev_dependencies:
   flutter_test:
@@ -50,6 +51,7 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - assets/person.png
+    - assets/squarenon.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see

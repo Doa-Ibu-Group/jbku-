@@ -10,8 +10,8 @@ class ReportController {
   final CollectionReference reportCollection =
       Firestore.instance.collection('reports');
 
-  Future addUserReport(String name, String titleOfReport, String reportCategory,
-      String reportDescription) async {
+  Future addOrUpdateReport(String name, String titleOfReport,
+      String reportCategory, String reportDescription) async {
     return await reportCollection.document(uid).setData({
       'name': name,
       'titleOfReport': titleOfReport,
@@ -48,27 +48,17 @@ class ReportController {
     return reportCollection.snapshots().map((_reportListFromSnapshot));
   }
 
-  //get User doc Stream
-  Stream<UserData> get userData {
-    return reportCollection
-        .document(uid)
-        .snapshots()
-        .map((_userDataFromSnapshot));
-  }
-
-  //userdata from snapshot
-  UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
-    return UserData(
-        uid: uid,
-        name: snapshot.data['name'],
-        titleOfReport: snapshot.data['titleOfReport'],
-        reportDescription: snapshot.data['reportDescription'],
-        reportCategory: snapshot.data['reportCategory']);
+  Future<DocumentSnapshot> getData() async {
+    return await reportCollection.document(uid).get();
   }
 
   //check if snapshot exist
-  bool dataIsExists(String uid) {
-    reportCollection.document(uid).get();
-    DocumentSnapshot task;
+  Future<bool> get dataIsExists async {
+    DocumentSnapshot snapshot = await ReportController().getData();
+    if (!snapshot.exists) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

@@ -1,7 +1,8 @@
 //fpr auth -nqb
+//@dart=2.9
 class User {
   final String uid;
-  User({required this.uid});
+  User({this.uid});
 }
 
 class UserData {
@@ -12,11 +13,11 @@ class UserData {
   final String reportCategory;
 
   UserData(
-      {required this.uid,
-      required this.name,
-      required this.titleOfReport,
-      required this.reportDescription,
-      required this.reportCategory});
+      {this.uid,
+      this.name,
+      this.titleOfReport,
+      this.reportDescription,
+      this.reportCategory});
 }
 
 class UserInformation {
@@ -27,9 +28,5 @@ class UserInformation {
   final String username;
 
   UserInformation(
-      {required this.uid,
-      required this.fullname,
-      required this.location,
-      required this.nric,
-      required this.username});
+      {this.uid, this.fullname, this.location, this.nric, this.username});
 }

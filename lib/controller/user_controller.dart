@@ -44,7 +44,6 @@ class UserController {
 
   Future<String> getUserFullName() async {
     DocumentSnapshot snapshot = await getData();
-    print('print from Controller${snapshot.data['fullname']}');
     return snapshot.data['fullname'];
   }
 }

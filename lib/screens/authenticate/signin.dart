@@ -30,7 +30,7 @@ class _SignInState extends State<SignIn> {
             appBar: AppBar(
               backgroundColor: Colors.black,
               elevation: 0.0,
-              title: Text('Sign In '),
+              title: Text('SIGN IN'),
               actions: [
                 IconButton(
                     padding: EdgeInsets.only(right: 40.0),
