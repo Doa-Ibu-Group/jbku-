@@ -26,7 +26,12 @@ class UserInformation {
   final String location;
   final String nric;
   final String username;
-
+  final String role;
   UserInformation(
-      {this.uid, this.fullname, this.location, this.nric, this.username});
+      {this.uid,
+      this.fullname,
+      this.location,
+      this.nric,
+      this.username,
+      this.role});
 }

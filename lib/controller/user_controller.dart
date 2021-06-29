@@ -17,6 +17,7 @@ class UserController {
       'fullname': fullname,
       'username': username,
       'location': location,
+      'role': 'user',
     });
   }
 
@@ -35,7 +36,8 @@ class UserController {
         fullname: snapshot.data['fullname'],
         location: snapshot.data['location'],
         nric: snapshot.data['nric'],
-        username: snapshot.data['username']);
+        username: snapshot.data['username'],
+        role: snapshot.data['role']);
   }
 
   Future<DocumentSnapshot> getData() async {
