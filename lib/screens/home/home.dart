@@ -1,5 +1,6 @@
 // @dart=2.9
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jbku_project/controller/user_controller.dart';
 import 'package:jbku_project/models/report.dart';
@@ -12,13 +13,28 @@ import 'package:jbku_project/screens/create_reports/report_page.dart';
 import 'package:jbku_project/screens/home/user_setting.dart';
 import 'package:provider/provider.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
   final UserAuthController _auth = UserAuthController();
+
+  int _selectedIndex = 0;
+
+  List<Widget> _widgetOptions = <Widget>[
+    ReportList(),
+    ReportPage(),
+    Text('Treack'),
+    Text('Profile')
+  ];
 
   @override
   Widget build(BuildContext context) {
     final user =
         Provider.of<User>(context); //cuz we have access the stream user
+
     return StreamProvider<List<Report>>.value(
       value: ReportController().reports,
       child: Scaffold(
@@ -44,16 +60,28 @@ class Home extends StatelessWidget {
                 }));
               }),
         ]),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return ReportPage();
-            }));
+        body: _widgetOptions[_selectedIndex],
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _selectedIndex,
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Colors.purple[200],
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: 'Timeline',
+                backgroundColor: Colors.white),
+            BottomNavigationBarItem(
+                icon: Icon(CupertinoIcons.doc_plaintext), label: 'Report'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.source_outlined), label: 'Track'),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile')
+          ],
+          onTap: (index) {
+            setState(() {
+              _selectedIndex = index;
+            });
           },
-          child: const Icon(Icons.navigation),
-          backgroundColor: Colors.green,
         ),
-        body: ReportList(),
       ),
     );
   }

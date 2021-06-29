@@ -10,14 +10,22 @@ class ReportController {
   final CollectionReference reportCollection =
       Firestore.instance.collection('reports');
 
-  Future addOrUpdateReport(String name, String titleOfReport,
+  Future addOrUpdateReport(String id, String name, String titleOfReport,
       String reportCategory, String reportDescription) async {
     return await reportCollection.document(uid).setData({
+      'reportID': id,
       'name': name,
       'titleOfReport': titleOfReport,
       'reportCategory': reportCategory,
       'reportDescription': reportDescription,
       'dateTime': DateTime.now(),
+      'respond': "",
+    });
+  }
+
+  Future addRespond(String respond) async {
+    return await reportCollection.document(uid).updateData({
+      'respond': respond,
     });
   }
 
@@ -35,11 +43,14 @@ class ReportController {
   List<Report> _reportListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return Report(
-          name: doc.data['name'] ?? '',
-          reportCategory: doc.data['reportCategory'] ?? '',
-          titleOfReport: doc.data['titleOfReport'] ?? '',
-          reportDescription: doc.data['reportDescription'] ?? '',
-          dateTime: doc.data['dateTime'].toDate() ?? '');
+        reportID: doc.data['reportID'] ?? '',
+        name: doc.data['name'] ?? '',
+        reportCategory: doc.data['reportCategory'] ?? '',
+        titleOfReport: doc.data['titleOfReport'] ?? '',
+        reportDescription: doc.data['reportDescription'] ?? '',
+        dateTime: doc.data['dateTime'].toDate() ?? '',
+        respond: doc.data['respond'] ?? '',
+      );
     }).toList();
   }
 

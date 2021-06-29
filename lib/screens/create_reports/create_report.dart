@@ -19,17 +19,15 @@ class _CreatePotholesPageState extends State<CreatePotholesPage> {
   final _formKey = GlobalKey<FormState>();
 
   Widget build(BuildContext context) {
-    final user =
-        Provider.of<User>(context); //cuz we have access the stream user
-    return ViewModelBuilder.reactive(
-        viewModelBuilder: () => CreatePotholesViewModel(),
-        onModelReady: (model) => null,
-        builder: (context, model, child) {
-          return Scaffold(
-              appBar: AppBar(
-                title: Text('Create Report'),
-              ),
-              body: Form(
+    final user = Provider.of<User>(context);
+    //cuz we have access the stream user
+    return Scaffold(
+        appBar: AppBar(),
+        body: ViewModelBuilder.reactive(
+            viewModelBuilder: () => CreatePotholesViewModel(),
+            onModelReady: (model) => null,
+            builder: (context, model, child) {
+              return Form(
                 key: _formKey,
                 child: Column(
                   children: <Widget>[
@@ -79,6 +77,7 @@ class _CreatePotholesPageState extends State<CreatePotholesPage> {
                                 'current report category${model.currentReportCategory}');
                             await ReportController(uid: user.uid)
                                 .addOrUpdateReport(
+                                    model.reportUniqueId,
                                     model.currentName,
                                     model.currentTitleOfReport,
                                     model.currentReportCategory,
@@ -91,7 +90,7 @@ class _CreatePotholesPageState extends State<CreatePotholesPage> {
                         child: Text('Post update'))
                   ],
                 ),
-              ));
-        });
+              );
+            }));
   }
 }
