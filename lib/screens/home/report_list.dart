@@ -1,5 +1,7 @@
 // @dart=2.9
 import 'package:flutter/material.dart';
+import 'package:jbku_project/controller/admin_contoller.dart';
+import 'package:jbku_project/controller/report_controller.dart';
 import 'package:jbku_project/controller/user_controller.dart';
 import 'package:jbku_project/models/report.dart';
 import 'package:jbku_project/models/user.dart';
@@ -16,18 +18,12 @@ class _ReportListState extends State<ReportList> {
   @override
   Widget build(BuildContext context) {
     final reports = Provider.of<List<Report>>(context) ?? [];
-    final user =
-        Provider.of<User>(context); //cuz we have access the stream user
-    return StreamBuilder<UserInformation>(
-        stream: UserController(uid: user.uid).userInformation,
-        builder: (context, snapshot) {
-          return ListView.builder(
-            itemCount: reports.length,
-            itemBuilder: (context, index) {
-              reports.sort((a, b) => a.name.compareTo(b.name));
-              return ReportTile(report: reports[index]);
-            },
-          );
-        });
+    return ListView.builder(
+      itemCount: reports.length,
+      itemBuilder: (context, index) {
+        reports.sort((a, b) => b.dateTime.compareTo(a.dateTime));
+        return ReportTile(report: reports[index]);
+      },
+    );
   }
 }

@@ -18,6 +18,13 @@ class UserController {
       'username': username,
       'location': location,
       'role': 'user',
+      'pictUrl': '',
+    });
+  }
+
+  Future addprofilepic(String pictUrl) async {
+    return await userCollection.document(uid).updateData({
+      'pictUrl': pictUrl,
     });
   }
 
@@ -37,7 +44,8 @@ class UserController {
         location: snapshot.data['location'],
         nric: snapshot.data['nric'],
         username: snapshot.data['username'],
-        role: snapshot.data['role']);
+        role: snapshot.data['role'],
+        pictUrl: snapshot.data['pictUrl']);
   }
 
   Future<DocumentSnapshot> getData() async {

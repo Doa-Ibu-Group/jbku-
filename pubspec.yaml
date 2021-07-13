@@ -26,8 +26,11 @@ dependencies:
   cloud_firestore: ^0.12.9+4
   cupertino_icons: ^1.0.2
   firebase_auth: ^0.14.0+5
+  firebase_storage: ^3.1.6
   flutter_spinkit: ^4.0.0
+  image_picker: ^0.6.7+4
   intl: ^0.17.0
+  permission_handler: ^5.0.1+1
   provider: ^4.3.3
   stacked: ^1.2.0
   uuid: ^3.0.4
@@ -53,6 +56,8 @@ flutter:
   assets:
     - assets/person.png
     - assets/squarenon.png
+    - assets/cat.png
+    - assets/logo.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see

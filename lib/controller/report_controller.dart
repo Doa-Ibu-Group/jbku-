@@ -1,7 +1,13 @@
 // @dart=2.9
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:jbku_project/models/report.dart';
 import 'package:jbku_project/models/user.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class ReportController {
   final String uid;
@@ -11,20 +17,22 @@ class ReportController {
       Firestore.instance.collection('reports');
 
   Future addOrUpdateReport(String id, String name, String titleOfReport,
-      String reportCategory, String reportDescription) async {
+      String reportCategory, String reportDescription, String imageUrl) async {
     return await reportCollection.document(uid).setData({
       'reportID': id,
+      'userId': uid,
       'name': name,
       'titleOfReport': titleOfReport,
       'reportCategory': reportCategory,
       'reportDescription': reportDescription,
+      'imageUrl': imageUrl,
       'dateTime': DateTime.now(),
-      'respond': "",
+      'respond': "your report is still being handled",
     });
   }
 
-  Future addRespond(String respond) async {
-    return await reportCollection.document(uid).updateData({
+  Future addRespond(String reportUid, String respond) async {
+    return await reportCollection.document(reportUid).updateData({
       'respond': respond,
     });
   }
@@ -43,14 +51,15 @@ class ReportController {
   List<Report> _reportListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return Report(
-        reportID: doc.data['reportID'] ?? '',
-        name: doc.data['name'] ?? '',
-        reportCategory: doc.data['reportCategory'] ?? '',
-        titleOfReport: doc.data['titleOfReport'] ?? '',
-        reportDescription: doc.data['reportDescription'] ?? '',
-        dateTime: doc.data['dateTime'].toDate() ?? '',
-        respond: doc.data['respond'] ?? '',
-      );
+          userId: doc.data['userId'] ?? '',
+          reportID: doc.data['reportID'] ?? '',
+          name: doc.data['name'] ?? '',
+          reportCategory: doc.data['reportCategory'] ?? '',
+          titleOfReport: doc.data['titleOfReport'] ?? '',
+          reportDescription: doc.data['reportDescription'] ?? '',
+          dateTime: doc.data['dateTime'].toDate() ?? '',
+          respond: doc.data['respond'] ?? '',
+          imageUrl: doc.data['imageUrl'] ?? '');
     }).toList();
   }
 
@@ -71,5 +80,39 @@ class ReportController {
     } else {
       return false;
     }
+  }
+
+  Future<String> uploadImage() async {
+    DateTime now = new DateTime.now();
+    var datestamp = new DateFormat("yyyyMMdd'T'HHmmss");
+    String currentdate = datestamp.format(now);
+    final _storage = FirebaseStorage.instance;
+    final _picker = ImagePicker();
+    PickedFile image;
+    //check permission
+    await Permission.photos.request();
+    var permissionstatus = await Permission.photos.status;
+    if (permissionstatus.isGranted) {
+      //select image
+      image = await _picker.getImage(source: ImageSource.gallery);
+      var file = File(image.path);
+      if (image != null) {
+        var snapshot = await _storage
+            .ref()
+            .child('Report/$currentdate')
+            .putFile(file)
+            .onComplete;
+        var downloadUrl = await snapshot.ref.getDownloadURL();
+        return downloadUrl;
+      } else {
+        print('No Path Receive');
+        return null;
+      }
+    } else {
+      print('Grant Permission Unsuccesful Try Again');
+      return null;
+    }
+
+    //upload to firebase
   }
 }

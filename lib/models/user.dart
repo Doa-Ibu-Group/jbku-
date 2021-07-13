@@ -5,21 +5,6 @@ class User {
   User({this.uid});
 }
 
-class UserData {
-  final String uid;
-  final String name;
-  final String titleOfReport;
-  final String reportDescription;
-  final String reportCategory;
-
-  UserData(
-      {this.uid,
-      this.name,
-      this.titleOfReport,
-      this.reportDescription,
-      this.reportCategory});
-}
-
 class UserInformation {
   final String uid;
   final String fullname;
@@ -27,11 +12,13 @@ class UserInformation {
   final String nric;
   final String username;
   final String role;
+  final String pictUrl;
   UserInformation(
       {this.uid,
       this.fullname,
       this.location,
       this.nric,
       this.username,
-      this.role});
+      this.role,
+      this.pictUrl});
 }

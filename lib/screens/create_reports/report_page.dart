@@ -44,11 +44,6 @@ class _ReportPageState extends State<ReportPage> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(top: 10.0),
-                            child: Image(
-                                image: AssetImage('assets/squarenon.png')),
-                          ),
-                          Padding(
                             padding:
                                 const EdgeInsets.fromLTRB(20.0, 20.0, 0, 0),
                             child: Text('I want to report a ...?',
@@ -80,7 +75,8 @@ class _ReportPageState extends State<ReportPage> {
                                           Navigator.push(context,
                                               MaterialPageRoute(
                                                   builder: (context) {
-                                            return CreatePotholesPage();
+                                            return CreateReport(
+                                                category: 'Potholes');
                                           }));
                                         } else {
                                           print(snapshot.data['name']);
@@ -99,10 +95,61 @@ class _ReportPageState extends State<ReportPage> {
                                         }
                                         break;
                                       case 'Illegal Parking':
-                                        print('ILEGAL PARKING');
+                                        DocumentSnapshot snapshot =
+                                            await ReportController(
+                                                    uid: user.uid)
+                                                .getData();
+                                        if (snapshot?.data?.isEmpty ?? true) {
+                                          Navigator.push(context,
+                                              MaterialPageRoute(
+                                                  builder: (context) {
+                                            return CreateReport(
+                                                category: 'Illegal Parking');
+                                          }));
+                                        } else {
+                                          print(snapshot.data['name']);
+                                          return showDialog<void>(
+                                            context: context,
+                                            barrierDismissible:
+                                                true, // user must tap button!
+                                            builder: (BuildContext context) {
+                                              return AlertDialog(
+                                                  title: Text(
+                                                      'You Have Active Report'),
+                                                  content: Text(
+                                                      'Please let Officer do their work '));
+                                            },
+                                          );
+                                        }
                                         break;
                                       case 'Suspicious Activity':
-                                        print('SUPICIOUS ACTIVITY');
+                                        DocumentSnapshot snapshot =
+                                            await ReportController(
+                                                    uid: user.uid)
+                                                .getData();
+                                        if (snapshot?.data?.isEmpty ?? true) {
+                                          Navigator.push(context,
+                                              MaterialPageRoute(
+                                                  builder: (context) {
+                                            return CreateReport(
+                                                category:
+                                                    'Suspicious Activity');
+                                          }));
+                                        } else {
+                                          print(snapshot.data['name']);
+                                          return showDialog<void>(
+                                            context: context,
+                                            barrierDismissible:
+                                                true, // user must tap button!
+                                            builder: (BuildContext context) {
+                                              return AlertDialog(
+                                                  title: Text(
+                                                      'You Have Active Report'),
+                                                  content: Text(
+                                                      'Please let Officer do their work '));
+                                            },
+                                          );
+                                        }
                                         break;
                                       default:
                                         print(

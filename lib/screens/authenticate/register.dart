@@ -31,17 +31,18 @@ class _RegisterState extends State<Register> {
     return loading
         ? Loading()
         : Scaffold(
-            backgroundColor: Colors.amber,
+            backgroundColor: Colors.white,
             appBar: AppBar(
-              backgroundColor: Colors.black,
+              backgroundColor: Colors.white,
               elevation: 0.0,
-              title: Text('Register to JBku'),
+              title: Text('Register to JBku',
+                  style: TextStyle(color: Colors.black87, fontSize: 22.0)),
               actions: [
                 IconButton(
                     padding: EdgeInsets.only(right: 40.0),
                     icon: Icon(
                       Icons.login,
-                      color: Colors.white,
+                      color: Colors.black87,
                     ),
                     onPressed: () {
                       widget.toggleView();
@@ -56,6 +57,11 @@ class _RegisterState extends State<Register> {
                   child: SingleChildScrollView(
                     child: Column(
                       children: <Widget>[
+                        Text(
+                          'Make Johor a better place',
+                          style:
+                              TextStyle(color: Colors.black87, fontSize: 18.0),
+                        ),
                         SizedBox(
                           height: 20.0,
                         ),
@@ -121,7 +127,7 @@ class _RegisterState extends State<Register> {
                         ),
                         TextFormField(
                           decoration: textInputDecoration.copyWith(
-                            hintText: 'location',
+                            hintText: 'Location',
                           ),
                           validator: (value) =>
                               value.isEmpty ? 'Enter location' : null,
@@ -151,7 +157,11 @@ class _RegisterState extends State<Register> {
                           height: 30.0,
                         ),
                         ElevatedButton(
-                            child: Text('register'),
+                            child: Text('Register'),
+                            style: ElevatedButton.styleFrom(
+                                primary: Colors.deepPurple[700],
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 15, vertical: 12)),
                             onPressed: () async {
                               if (_formKey.currentState.validate()) {
                                 setState(() => loading = true);

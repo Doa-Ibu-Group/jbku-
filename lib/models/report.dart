@@ -1,4 +1,5 @@
 class Report {
+  final String userId;
   final String reportID;
   final String name;
   final String titleOfReport;
@@ -6,9 +7,12 @@ class Report {
   final String reportCategory;
   final DateTime dateTime;
   final String respond;
+  final String imageUrl;
 
   Report(
-      {required this.reportID,
+      {required this.imageUrl,
+      required this.userId,
+      required this.reportID,
       required this.name,
       required this.titleOfReport,
       required this.reportDescription,

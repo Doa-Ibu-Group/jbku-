@@ -9,12 +9,14 @@ import 'package:jbku_project/share/loading.dart';
 import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
 
-class CreatePotholesPage extends StatefulWidget {
+class CreateReport extends StatefulWidget {
+  final String category;
+  CreateReport({this.category});
   @override
-  _CreatePotholesPageState createState() => _CreatePotholesPageState();
+  _CreateReportState createState() => _CreateReportState();
 }
 
-class _CreatePotholesPageState extends State<CreatePotholesPage> {
+class _CreateReportState extends State<CreateReport> {
   @override
   final _formKey = GlobalKey<FormState>();
 
@@ -69,19 +71,29 @@ class _CreatePotholesPageState extends State<CreatePotholesPage> {
                     SizedBox(
                       height: 30.0,
                     ),
+                    Row(
+                      children: <Widget>[
+                        ElevatedButton(
+                            onPressed: () async {
+                              await model.uploadImage();
+                              setState(() {});
+                            },
+                            child: Text('Upload Image')),
+                        Text(
+                            '    ${model.currentImageUrl ?? model.currentImageUrl}')
+                      ],
+                    ),
                     ElevatedButton(
                         onPressed: () async {
                           if (_formKey.currentState.validate()) {
-                            print('current name = ${model.currentName}');
-                            print(
-                                'current report category${model.currentReportCategory}');
                             await ReportController(uid: user.uid)
                                 .addOrUpdateReport(
                                     model.reportUniqueId,
                                     model.currentName,
                                     model.currentTitleOfReport,
-                                    model.currentReportCategory,
-                                    model.currentReportDescription);
+                                    widget.category,
+                                    model.currentReportDescription,
+                                    model.currentImageUrl);
 
                             Navigator.popUntil(
                                 context, ModalRoute.withName('/'));
