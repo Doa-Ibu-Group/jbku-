@@ -2,10 +2,10 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:jbku_project/models/report.dart';
+import 'package:jbku_project/backend/models/report.dart';
 import 'package:jbku_project/screens/admin/admin_report_list.dart';
-import 'package:jbku_project/controller/userAuthentication_controller.dart';
-import 'package:jbku_project/controller/report_controller.dart';
+import 'package:jbku_project/backend/controller/userAuthentication_controller.dart';
+import 'package:jbku_project/backend/controller/report_controller.dart';
 import 'package:provider/provider.dart';
 
 class AdminHome extends StatefulWidget {

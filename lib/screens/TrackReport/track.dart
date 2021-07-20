@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:jbku_project/models/report.dart';
-import 'package:jbku_project/models/user.dart';
+import 'package:jbku_project/backend/models/report.dart';
+import 'package:jbku_project/backend/models/user.dart';
 import 'package:provider/provider.dart';
 
 class TrackScreen extends StatelessWidget {

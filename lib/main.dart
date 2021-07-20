@@ -1,8 +1,8 @@
 // @dart=2.9
 import 'package:flutter/material.dart';
-import 'package:jbku_project/models/user.dart';
+import 'package:jbku_project/backend/models/user.dart';
 import 'package:jbku_project/screens/wrapper.dart';
-import 'package:jbku_project/controller/userAuthentication_controller.dart';
+import 'package:jbku_project/backend/controller/userAuthentication_controller.dart';
 import 'package:provider/provider.dart';
 
 void main() {

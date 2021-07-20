@@ -1,7 +1,7 @@
 // @dart=2.9
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:jbku_project/models/user.dart';
+import 'package:jbku_project/backend/models/user.dart';
 
 class UserController {
   final String uid;

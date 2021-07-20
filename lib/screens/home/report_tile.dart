@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:jbku_project/models/report.dart';
+import 'package:jbku_project/backend/models/report.dart';
 
 class ReportTile extends StatelessWidget {
   final Report report;

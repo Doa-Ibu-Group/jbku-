@@ -1,9 +1,9 @@
 // @dart=2.9
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:jbku_project/controller/user_controller.dart';
-import 'package:jbku_project/models/user.dart';
+import 'package:jbku_project/backend/controller/user_controller.dart';
+import 'package:jbku_project/backend/models/user.dart';
 import 'package:jbku_project/screens/authenticate/signin.dart';
-import 'package:jbku_project/controller/report_controller.dart';
+import 'package:jbku_project/backend/controller/report_controller.dart';
 
 class UserAuthController {
   final FirebaseAuth _auth = FirebaseAuth.instance;

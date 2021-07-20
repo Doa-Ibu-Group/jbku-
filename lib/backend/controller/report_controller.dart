@@ -5,8 +5,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:jbku_project/models/report.dart';
-import 'package:jbku_project/models/user.dart';
+import 'package:jbku_project/backend/models/report.dart';
+import 'package:jbku_project/backend/models/user.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class ReportController {

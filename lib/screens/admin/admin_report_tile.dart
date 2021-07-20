@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:jbku_project/controller/admin_contoller.dart';
-import 'package:jbku_project/models/report.dart';
+import 'package:jbku_project/backend/controller/admin_contoller.dart';
+import 'package:jbku_project/backend/models/report.dart';
 import 'package:jbku_project/screens/admin/admin_respond_report.dart';
 
 class ReportTileAdmin extends StatelessWidget {
